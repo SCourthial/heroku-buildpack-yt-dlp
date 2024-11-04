@@ -1,9 +1,3 @@
 #!/bin/sh
 
-# Only use buildpack if yt-dlp is not installed yet
-if command -v yt-dlp >/dev/null 2>&1; then
-  exit 1
-else
-  echo "yt-dlp"
-  exit 0
-fi
+echo "yt-dlp"
