@@ -2,12 +2,18 @@
 
 set -eo pipefail
 BUILD_DIR=${1:-}
-cd $BUILD_DIR
+cd "$BUILD_DIR"
 mkdir -p vendor/yt
 cd vendor/yt
+
 curl --location https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o yt-dlp
 chmod a+rx yt-dlp
 ./yt-dlp --version
+
+curl --location https://github.com/yt-dlp/yt-dlp-nightly-builds/releases/latest/download/yt-dlp -o yt-dlp-nightly
+chmod a+rx yt-dlp-nightly
+./yt-dlp-nightly --version
+
 PROFILE_PATH="$BUILD_DIR/.profile.d/yt-dlp.sh"
-mkdir -p $(dirname $PROFILE_PATH)
-echo 'export PATH="$PATH:/app/vendor/yt"' >> $PROFILE_PATH
+mkdir -p "$(dirname "$PROFILE_PATH")"
+echo 'export PATH="$PATH:/app/vendor/yt"' >> "$PROFILE_PATH"
